@@ -1,7 +1,7 @@
 
 import { EmailValidatorAdapter } from '../../utils-adapters/email-validator-adapter'
 import { LoginController } from '../../presentation/controllers/login/login'
-import { Dbauth } from '../../data/useCases/protocols/db-authentication'
+import { Dbauth } from '../../data/useCases/db-authentication'
 import { DcryptAdapter } from '../../utils-adapters/bcrypt-adapter'
 import { JwtAdapter } from '../../utils-adapters/jwt-adapter'
 import { AccountMongoRepository } from '../../infra/db/mongodb/account-repository/account'

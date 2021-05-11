@@ -19,6 +19,7 @@ export class AccountMongoRepository implements IAccountRepository {
       
       const { _id, name, email, password, role: role, created_date } = collection
       const newCollection: any = { id: _id, name: name, email: email, password: password, role: role, created_date: created_date }
+      
       await collection.save()
       return newCollection
     } catch (error) {

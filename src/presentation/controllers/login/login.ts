@@ -35,7 +35,7 @@ export class LoginController implements Controller {
       if (!account) {
         return notFound(`${user.email}`)
       }
-      const passwordDcrypt = await this.dcryptgraphy.dencrypt(user.password, account.password_hash)
+      const passwordDcrypt = await this.dcryptgraphy.dencrypt(user.password, account.password)
       if (passwordDcrypt === false) {
         return unauthorized(new Error('Unauthorized'))
       }

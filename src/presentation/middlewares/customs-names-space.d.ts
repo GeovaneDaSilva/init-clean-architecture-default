@@ -8,4 +8,8 @@ declare namespace Express {
   interface UserDb {
     password_hash?: any
   }
+
+  interface Account {
+    object: any
+  }
 }

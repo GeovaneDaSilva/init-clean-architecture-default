@@ -1,9 +1,11 @@
 
 import jwt from 'jsonwebtoken'
 import { Request, Response, NextFunction } from 'express'
-import UserService from '../../services/userService'
+import AccountSchema from '../../infra/db/mongodb/mongo-schemas/account-schema'
 
 export class AuthenticationToken {
+
+
   async veryfyToken (req: Request, res: Response, next: NextFunction) {
     try {
       const token = req.header('x-access-token')
@@ -18,7 +20,7 @@ export class AuthenticationToken {
 
       req.user = user.user
 
-      const userDB = await UserService.getById(req.user.id)
+      const userDB = await AccountSchema.findById(req.user.id)
 
       if (!userDB) {
         return res.status(403).json({

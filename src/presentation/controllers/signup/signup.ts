@@ -1,14 +1,15 @@
-import UserService from '../../../services/userService'
+import { IAccountRepository } from '../../../data/useCases/protocols/account-repository'
 import { InvalidParamError, MissingParamError } from '../../errors'
 import { ReadyExist } from '../../errors/ready-exist-error'
 import { badRequest, serverError, success } from '../../helpers/http-helper'
 import { HttpRequest, HttpResponse, Controller, EmailValidator, AddAccount } from './signup-protocols'
 
 export class SignUpController implements Controller {
-  constructor (private readonly emailValidator: EmailValidator,
+  constructor (private readonly emailValidator: EmailValidator, private iAccountRepository: IAccountRepository,
     private readonly addAccount: AddAccount) {
     this.emailValidator = emailValidator
     this.addAccount = addAccount
+    this.iAccountRepository = iAccountRepository
   }
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
@@ -27,7 +28,7 @@ export class SignUpController implements Controller {
       if (!isValid) {
         return badRequest(new InvalidParamError('email'))
       }
-      const userReadyExist = await UserService.getOne(email)
+      const userReadyExist = await this.iAccountRepository.getOne(email)
       if (userReadyExist) {
         return badRequest(new ReadyExist(email))
       }

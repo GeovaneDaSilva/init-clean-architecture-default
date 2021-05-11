@@ -1,8 +1,7 @@
-import mongoose from 'mongoose'
+import mongoose, { Schema } from 'mongoose'
 import uniqueValidator from 'mongoose-unique-validator'
-import { AccountModel } from '../../../../domain/models/account'
 
-const UserSchema = new mongoose.Schema({
+const AccountSchema = new Schema({
   name: String,
   email: String,
   password: String,
@@ -12,5 +11,6 @@ const UserSchema = new mongoose.Schema({
 
 })
 
-UserSchema.plugin(uniqueValidator, { message: 'Error, expected {VALUE} to be unique.' })
-export default UserSchema.loadClass(AccountModel)
+AccountSchema.plugin(uniqueValidator, { message: 'Error, expected {VALUE} to be unique.' })
+
+export default mongoose.model('User', AccountSchema)

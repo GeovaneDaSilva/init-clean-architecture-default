@@ -1,13 +1,26 @@
 import { AccountModel } from '../../../../domain/models/account'
 import { AddAccountModel } from '../../../../domain/useCases/add-account'
-import UserRepository from '../../../../domain/repositories/userRepository'
+import AccountSchema from '../mongo-schemas/account-schema'
 import { IAccountRepository } from '../../../../data/useCases/protocols/account-repository'
+import IMongooseModelMapper from '../mappers/interface/IMongooseModelMapper'
+import { AccountModelMapper } from '../mappers/accountModelMaper'
 
 export class AccountMongoRepository implements IAccountRepository {
+
+  private _userModelMapper: IMongooseModelMapper<AccountModel>;
+    constructor(){
+      this._userModelMapper = new AccountModelMapper();
+    }
+
+
   async add (accountData: AddAccountModel): Promise<AccountModel> {
     try {
-      const collection: any = await UserRepository.create(accountData)
-      return collection
+      const collection: any = await this._userModelMapper.fromDomainEntity(accountData)
+      
+      const { _id, name, email, password, role: role, created_date } = collection
+      const newCollection: any = { id: _id, name: name, email: email, password: password, role: role, created_date: created_date }
+      await collection.save()
+      return newCollection
     } catch (error) {
       console.log(error)
     }
@@ -15,7 +28,7 @@ export class AccountMongoRepository implements IAccountRepository {
 
   async getAll (): Promise<AccountModel> {
     try {
-      const collection: any = await UserRepository.find({}, 'name email role password_hash created_date')
+      const collection: any = await AccountSchema.find({}, 'name email role password_hash created_date')
       return collection
     } catch (error) {
       console.log(error)
@@ -24,7 +37,7 @@ export class AccountMongoRepository implements IAccountRepository {
 
   async getOne (email: string): Promise<AccountModel> {
     try {
-      const collection: any = await UserRepository.findOne({ email: email })
+      const collection: any = await AccountSchema.findOne({ email: email })
       return collection
     } catch (error) {
       console.log(error)
@@ -33,7 +46,7 @@ export class AccountMongoRepository implements IAccountRepository {
 
   async getById (id: AccountModel): Promise<AccountModel> {
     try {
-      const collection: any = await UserRepository.findById(id, 'name email role password_hash created_date')
+      const collection: any = await AccountSchema.findById(id, 'name email role password_hash created_date')
       return collection
     } catch (error) {
       console.log(error)
@@ -42,7 +55,7 @@ export class AccountMongoRepository implements IAccountRepository {
 
   async delete (id: string): Promise<AccountModel> {
     try {
-      const collection: any = await UserRepository.findByIdAndDelete(id)
+      const collection: any = await AccountSchema.findByIdAndDelete(id)
       return collection
     } catch (error) {
       console.log(error)

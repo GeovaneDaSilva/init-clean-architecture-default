@@ -1,9 +1,9 @@
 
 import { Document } from 'mongoose';
 
-import { AccountModel } from '../../../../domain/models/account';
-import IMongooseModelMapper from './interface/IMongooseModelMapper';
-import AccountSchema from '../mongo-schemas/account-schema'
+import { AccountModel } from '../../../../../domain/models/account';
+import IMongooseModelMapper from '../interface/IMongooseModelMapper';
+import AccountSchema from '../../mongo-schemas/account-schema'
 
 export class AccountModelMapper implements IMongooseModelMapper<AccountModel> {
     

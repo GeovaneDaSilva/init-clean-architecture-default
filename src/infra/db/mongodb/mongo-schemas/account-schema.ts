@@ -7,7 +7,7 @@ const AccountSchema = new Schema({
   password: String,
   password_hash: String,
   role: String,
-  created_date: String
+  created_date: Date
 
 })
 

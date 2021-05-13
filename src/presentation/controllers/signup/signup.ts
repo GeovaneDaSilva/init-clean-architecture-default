@@ -5,8 +5,8 @@ import { badRequest, serverError, success } from '../../helpers/http-helper'
 import { HttpRequest, HttpResponse, Controller, EmailValidator, AddAccount } from './signup-protocols'
 
 export class SignUpController implements Controller {
-  constructor (private readonly emailValidator: EmailValidator, private iAccountRepository: IAccountRepository,
-    private readonly addAccount: AddAccount) {
+  constructor (private readonly emailValidator: EmailValidator, private readonly iAccountRepository: IAccountRepository,
+    private addAccount: AddAccount) {
     this.emailValidator = emailValidator
     this.addAccount = addAccount
     this.iAccountRepository = iAccountRepository

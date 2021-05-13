@@ -1,6 +1,8 @@
+import { IAccountRepository } from './../../../data/useCases/protocols/account-repository';
 import { AddAccount, AddAccountModel, AccountModel, EmailValidator } from './signup-protocols'
 import { InvalidParamError, MissingParamError, ServerError } from '../../errors'
 import { SignUpController } from './signup'
+import { String } from 'aws-sdk/clients/appstream';
 
 interface SutTypes {
   sut: SignUpController
@@ -19,13 +21,14 @@ const makeEmailValidator = (): EmailValidator => {
 
 const makeAddAccount = (): AddAccount => {
   class AddAccountStub implements AddAccount {
-    async add (account: AddAccountModel): Promise<AccountModel> {
+    async add (account: AccountModel): Promise<AccountModel> {
       const fakeAccount = {
         id: 'valid_id',
         name: 'valid_name',
         email: 'valid_email@email.com',
         password: 'valid_password',
-        role: 'valid_role'
+        role: 'valid_role',
+        created_date: new Date()
       }
       return new Promise(resolve => resolve(fakeAccount))
     }
@@ -33,10 +36,63 @@ const makeAddAccount = (): AddAccount => {
   return new AddAccountStub()
 }
 
+const makeRepository = (): IAccountRepository => {
+  class AccountRepositoryStub implements IAccountRepository {
+    async add (): Promise<AccountModel> {
+      try {
+        return null
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    async getAll (): Promise<AccountModel> {
+      try {
+        return null
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    async getOne (id: string): Promise<AccountModel> {
+      try {
+        return null
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    async getById (id: AccountModel): Promise<AccountModel> {
+      try {
+        return null
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    async update (id: String): Promise<AccountModel> {
+      try {
+        return null
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    async delete (id: String): Promise<AccountModel> {
+      try {
+        return null
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
+  return new AccountRepositoryStub()
+}
+
 const makeSut = (): SutTypes => {
   const emailValidatorStub = makeEmailValidator()
   const addAccountStub = makeAddAccount()
-  const sut = new SignUpController(emailValidatorStub, addAccountStub)
+  const AccountRepositoryStub = makeRepository()
+  const sut = new SignUpController(emailValidatorStub, AccountRepositoryStub, addAccountStub)
   return {
     sut,
     emailValidatorStub,

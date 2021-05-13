@@ -4,8 +4,6 @@ import { Request, Response, NextFunction } from 'express'
 import AccountSchema from '../../infra/db/mongodb/mongo-schemas/account-schema'
 
 export class AuthenticationToken {
-
-
   async veryfyToken (req: Request, res: Response, next: NextFunction) {
     try {
       const token = req.header('x-access-token')

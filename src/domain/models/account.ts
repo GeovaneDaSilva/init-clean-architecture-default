@@ -5,5 +5,4 @@ export class AccountModel {
   password: string
   role: string
   created_date: Date
-
 }

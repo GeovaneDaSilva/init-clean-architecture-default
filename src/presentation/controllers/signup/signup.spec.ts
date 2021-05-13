@@ -1,8 +1,9 @@
-import { IAccountRepository } from './../../../data/useCases/protocols/account-repository';
+/* eslint no-unreachable: "error" */
+import { IAccountRepository } from './../../../data/useCases/protocols/account-repository'
 import { AddAccount, AccountModel, EmailValidator } from './signup-protocols'
 import { InvalidParamError, MissingParamError, ServerError } from '../../errors'
 import { SignUpController } from './signup'
-import { String } from 'aws-sdk/clients/appstream';
+import { String } from 'aws-sdk/clients/appstream'
 
 interface SutTypes {
   sut: SignUpController
@@ -37,53 +38,18 @@ const makeAddAccount = (): AddAccount => {
 }
 
 const makeRepository = (): IAccountRepository => {
-  class AccountRepositoryStub implements IAccountRepository {
-    async add (): Promise<AccountModel> {
-      try {
-        return null
-      } catch (error) {
-        console.log(error)
-      }
-    }
+  class AccountRepositoryStub {
+    add: () => Promise<AccountModel>
 
-    async getAll (): Promise<AccountModel> {
-      try {
-        return null
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    async getOne (id: string): Promise<AccountModel> {
-      try {
-        return null
-      } catch (error) {
-        console.log(error)
-      }
-    }
+    getAll: () => Promise<AccountModel>
 
-    async getById (id: AccountModel): Promise<AccountModel> {
-      try {
-        return null
-      } catch (error) {
-        console.log(error)
-      }
-    }
+    getOne: (id: string) => Promise<AccountModel>
 
-    async update (id: String): Promise<AccountModel> {
-      try {
-        return null
-      } catch (error) {
-        console.log(error)
-      }
-    }
+    getById: (id: AccountModel) => Promise<AccountModel>
 
-    async delete (id: String): Promise<AccountModel> {
-      try {
-        return null
-      } catch (error) {
-        console.log(error)
-      }
-    }
+    update: (id: String) => Promise<AccountModel>
+
+    delete: (id: String) => Promise<AccountModel>
   }
   return new AccountRepositoryStub()
 }

@@ -1,8 +1,8 @@
-  import { Document } from 'mongoose';
+import { Document } from 'mongoose'
 
-  interface IMongooseModelMapper<DomainEntity> {
-    toDomainEntity?: (mongooseModel: Document<any, {}> | any) => DomainEntity;
-    fromDomainEntity?: (entity: DomainEntity) => Document<any, {}>;
-  }
-  
-  export default IMongooseModelMapper;
+interface IMongooseModelMapper<DomainEntity> {
+  toDomainEntity?: (mongooseModel: Document<any, {}> | any) => DomainEntity
+  fromDomainEntity?: (entity: DomainEntity) => Document<any, {}>
+}
+
+export default IMongooseModelMapper

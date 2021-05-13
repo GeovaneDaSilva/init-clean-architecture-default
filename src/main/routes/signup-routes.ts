@@ -5,7 +5,7 @@ import { makeLoginController } from '../factories/auth'
 import AuthenticationToken from '../../presentation/middlewares/auth-middlewares'
 export default (router: Router): void => {
   router.post('/login', AdaptRoute(makeLoginController()))
-  router.post('/signup',  AdaptRoute(makeSignUpController()))
+  router.post('/signup', AdaptRoute(makeSignUpController()))
 }
 
-//AuthenticationToken.veryfyToken, AuthenticationToken.veryfyRole_Admin,
+// AuthenticationToken.veryfyToken, AuthenticationToken.veryfyRole_Admin,

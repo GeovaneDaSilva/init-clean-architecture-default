@@ -6,7 +6,7 @@ import { HttpRequest, HttpResponse, Controller, EmailValidator, AddAccount } fro
 
 export class SignUpController implements Controller {
   constructor (private readonly emailValidator: EmailValidator, private readonly iAccountRepository: IAccountRepository,
-    private addAccount: AddAccount) {
+    private readonly addAccount: AddAccount) {
     this.emailValidator = emailValidator
     this.addAccount = addAccount
     this.iAccountRepository = iAccountRepository

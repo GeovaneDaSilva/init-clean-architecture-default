@@ -1,5 +1,5 @@
 import { IAccountRepository } from './../../../data/useCases/protocols/account-repository';
-import { AddAccount, AddAccountModel, AccountModel, EmailValidator } from './signup-protocols'
+import { AddAccount, AccountModel, EmailValidator } from './signup-protocols'
 import { InvalidParamError, MissingParamError, ServerError } from '../../errors'
 import { SignUpController } from './signup'
 import { String } from 'aws-sdk/clients/appstream';

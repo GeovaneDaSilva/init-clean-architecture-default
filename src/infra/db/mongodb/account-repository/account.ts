@@ -40,6 +40,7 @@ export class AccountMongoRepository implements IAccountRepository {
   async getOne (email: string): Promise<AccountModel> {
     try {
       const collection: AddAccountModel | any = await AccountSchema.findOne({ email: email })
+      
       return collection
     } catch (error) {
       console.log(error)
@@ -49,6 +50,15 @@ export class AccountMongoRepository implements IAccountRepository {
   async getById (id: AccountModel): Promise<AccountModel> {
     try {
       const collection: AddAccountModel | any = await AccountSchema.findById(id, 'name email role password_hash created_date')
+      return collection
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async update (id: string): Promise<AccountModel> {
+    try {
+      const collection: AddAccountModel | any = await AccountSchema.findByIdAndUpdate(id)
       return collection
     } catch (error) {
       console.log(error)

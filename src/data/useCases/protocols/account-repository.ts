@@ -7,5 +7,6 @@ export interface IAccountRepository {
   getOne: (email: string) => Promise<AccountModel>
   getById: (id: AccountModel) => Promise<AccountModel>
   delete: (id: string) => Promise<AccountModel>
+  update: (id: string) => Promise<AccountModel>
 
 }

@@ -10,7 +10,7 @@ export class Dbauth implements Authentication {
     this.iAccountRepository = iAccountRepository
   }
 
-  async auth (email: string, password: string): Promise<AccountModel> {
+  async auth (email: string): Promise<AccountModel> {
     try {
       const userDB: any = await this.iAccountRepository.getOne(email)
       const User: any = {

@@ -7,9 +7,7 @@ export const signupSchema = {
     email: {
       type: 'string'
     },
-    password_hash: {
-      type: 'string'
-    },
+
     role: {
       type: 'string'
     },

@@ -1,13 +1,14 @@
 import { Authentication } from '../../domain/useCases/authentication'
 import { AccountModel } from '../../domain/models/account'
 import { IJwt } from '../../presentation/interfaces/jwt-token'
-import { IAccountRepository } from './protocols/account-repository'
+import { IAccountRepository, IAccountRepositorySql } from './protocols/account-repository'
 
 export class Dbauth implements Authentication {
   constructor (private readonly iJwt: IJwt,
-    private readonly iAccountRepository: IAccountRepository) {
+    private readonly iAccountRepository: IAccountRepository, private readonly iAccountRepositorySql: IAccountRepositorySql) {
     this.iJwt = iJwt
     this.iAccountRepository = iAccountRepository
+    this.iAccountRepositorySql = iAccountRepositorySql
   }
 
   async auth (email: string): Promise<AccountModel> {
@@ -30,6 +31,7 @@ export class Dbauth implements Authentication {
       const newUser: any = {
         User,
         token
+
       }
       return newUser
     } catch (error) {

@@ -10,9 +10,7 @@ export const signupParamsSchema = {
     password: {
       type: 'string'
     },
-    passwordConfirmarion: {
-      type: 'string'
-    },
+
     role: {
       type: 'string'
     }

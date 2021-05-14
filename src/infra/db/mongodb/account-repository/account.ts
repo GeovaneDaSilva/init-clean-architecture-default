@@ -4,6 +4,7 @@ import AccountSchema from '../mongo-schemas/account-schema'
 import { IAccountRepository } from '../../../../data/useCases/protocols/account-repository'
 import IMongooseModelMapper from '../mappers/interface/IMongooseModelMapper'
 import { AccountModelMapper } from '../mappers/model-mapper/accountModelMaper'
+import Account from '../../mysql/sequelize-schemas/account-schema'
 
 export class AccountMongoRepository implements IAccountRepository {
   private readonly _userModelMapper: IMongooseModelMapper<AccountModel>
@@ -27,7 +28,7 @@ export class AccountMongoRepository implements IAccountRepository {
 
   async getAll (): Promise<AccountModel> {
     try {
-      const collection: AddAccountModel | any = await AccountSchema.find({}, 'name email role password_hash created_date')
+      const collection: AddAccountModel | any = await Account.findAll()
       return collection
     } catch (error) {
       console.log(error)
@@ -44,7 +45,7 @@ export class AccountMongoRepository implements IAccountRepository {
     }
   }
 
-  async getById (id: AccountModel): Promise<AccountModel> {
+  async getById (id: string): Promise<AccountModel> {
     try {
       const collection: AddAccountModel | any = await AccountSchema.findById(id, 'name email role password_hash created_date')
       return collection
